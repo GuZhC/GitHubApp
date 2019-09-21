@@ -4,7 +4,7 @@ import com.guzhc.githubapp.data.model.LoggedInUser
 import java.io.IOException
 
 /**
- * Class that handles authentication w/ login credentials and retrieves user information.
+ * Class th at handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
 
