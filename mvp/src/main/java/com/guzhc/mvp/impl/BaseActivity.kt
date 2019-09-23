@@ -1,6 +1,7 @@
 package com.guzhc.mvp.impl
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.guzhc.mvp.IMvpView
 import com.guzhc.mvp.IPresenter
@@ -9,7 +10,7 @@ import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.jvmErasure
 
-abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P>, Fragment() {
+abstract class BaseActivity<out P : BasePresenter<BaseActivity<P>>> : IMvpView<P>, AppCompatActivity() {
     override val presenter: P
 
     init {
@@ -19,7 +20,7 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
 
     private fun createPresenterKt(): P {
         sequence {
-            var thisClass: KClass<*> = this@BaseFragment::class
+            var thisClass: KClass<*> = this@BaseActivity::class
             while (true) {
                 yield(thisClass.supertypes)
                 thisClass = thisClass.supertypes.firstOrNull()?.jvmErasure ?: break
@@ -43,10 +44,7 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
         presenter.onSaveInstanceState(outState)
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        presenter.onViewStateRestored(savedInstanceState)
-    }
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {}
 
     override fun onStart() {
         super.onStart()

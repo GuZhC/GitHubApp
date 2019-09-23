@@ -13,14 +13,14 @@ interface ILifecycle {
 
     fun onConfigurationChange(newConfig: Configuration)
 
-    fun onDestroy()
-
     fun onStart()
-
-    fun onStop()
 
     fun onResume()
 
     fun onPause()
+
+    fun onStop()
+
+    fun onDestroy()
 
 }
